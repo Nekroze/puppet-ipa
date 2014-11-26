@@ -43,6 +43,15 @@ class ipa::params(
 	if "${comment}" == '' {
 		warning('Unable to load yaml data/ directory!')
 	}
+	
+	case $operatingsystem {
+		'Archlinux': { 
+			$package_ipa_client = 'freeipa',
+		}
+		default: { 
+			$package_ipa_client = 'ipa-client',
+		}
+	}
 
 	$valid_include_puppet_facter = $include_puppet_facter ? {
 		true => true,
